@@ -12,7 +12,7 @@ datasource db {
 
 enum Role {
   ADMIN
-  REVIWER
+  REVIEWER
   SUBMITTER
 }
 
@@ -20,6 +20,8 @@ model User {
   id          String       @id @default(uuid())
   email       String       @unique
   name        String
+  company     String
+  phone       String
   creditCards CreditCard[]
   articles    Article[]
   reviews     Review[]
@@ -39,8 +41,8 @@ model CreditCard {
   id      String   @id @default(uuid())
   number  String
   brand   String
-  cvc String
-  expiry DateTime
+  cvc     String
+  expiry  String
   user    User     @relation(fields: [userId], references: [id])
   userId  String
 }

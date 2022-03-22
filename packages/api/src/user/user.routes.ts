@@ -1,14 +1,13 @@
 import { Router } from 'express';
-import { body } from 'express-validator';
 
 import userController from './user.controller';
+import { createUserValidationMiddleware } from './user.validators';
 
 const userRoutes = Router();
 
 userRoutes.post(
   '/create',
-  body('email').isEmail(),
-  body('name').isLength({ min: 3 }),
+  createUserValidationMiddleware,
   userController.createUser
 );
 
