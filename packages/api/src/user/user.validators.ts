@@ -24,6 +24,16 @@ export const createUserValidationMiddleware = checkSchema({
       },
     },
   },
+  password: {
+    isStrongPassword: {
+      options: {
+        minLength: 3,
+        minNumbers: 3,
+        minSymbols: 1,
+        returnScore: true,
+      },
+    },
+  },
   'creditCard.number': {
     isLength: {
       options: {

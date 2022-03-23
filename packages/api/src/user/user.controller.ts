@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ValidationError, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import { CreateUserDTO } from './user.dto';
 import userRepository from './user.repository';
 
