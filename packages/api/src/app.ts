@@ -11,4 +11,8 @@ app.use(express.json());
 app.use('/api', authRouter);
 app.use('/api/user', userRouter);
 
+app.get('/healthcheck', (_, res) => {
+  res.send('Alive');
+});
+
 export default app;
