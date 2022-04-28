@@ -6,9 +6,6 @@
     "lib": ["esnext"],
     "esModuleInterop": true,
     "baseUrl": "src",
-    "paths": {
-      "config/*": ["config/*"],
-      "user/*": ["user/*"]
-    }
+    "skipLibCheck": true
   }
 }

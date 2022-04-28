@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
-import userRepository from 'user/user.repository';
+import userRepository from '../user/user.repository';
 import jwt from 'jsonwebtoken';
-import Constants from 'config/constants';
+import Constants from '../config/constants';
 
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;

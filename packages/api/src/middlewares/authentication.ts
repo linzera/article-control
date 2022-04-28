@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import Constants from 'config/constants';
+import Constants from '../config/constants';
 
 type JWTUser = {};
 
@@ -19,6 +19,7 @@ export const authenticateJWT = (
         return res.sendStatus(403);
       }
 
+      //@ts-ignore here we insert user to the payload
       req.user = user as JWTUser;
       next();
     });

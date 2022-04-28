@@ -1,4 +1,4 @@
-import prisma from 'config/db';
+import prisma from '../config/db';
 import creditCardType from 'credit-card-type';
 import bcrypt from 'bcryptjs';
 import { CreateUserDTO } from './user.dto';

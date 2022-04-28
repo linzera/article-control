@@ -1,6 +1,5 @@
 import { checkSchema } from 'express-validator';
-import { CreditCardBodyArg } from 'user/user.dto';
-import userRepository from 'user/user.repository';
+import userRepository from './user.repository';
 
 export const createUserValidationMiddleware = checkSchema({
   email: {
