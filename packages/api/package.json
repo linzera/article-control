@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ."
+    "start": "nodemon .",
+    "start:prod": "node -r tsconfig-paths/register -r ts-node/register src/server.ts",
+    "migrate:prod": "npx prisma migrate deploy"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
