@@ -1,9 +1,9 @@
-import { Stack, Box, Progress } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Stack } from '@chakra-ui/react';
 import { Form } from '../screens/Login';
-import AddressStep, { AddressData } from './AddressStep';
-import ProfileStep, { ProfileData } from './ProfileStep';
+import AddressStep from './AddressStep';
+import ProfileStep from './ProfileStep';
 import CreditCardStep from './CreditCardStep';
+import useSignUpContext from '../context/SignUpContext';
 
 enum SignUpStep {
   PROFILE,
@@ -19,47 +19,24 @@ export type StepProps = {
   setStep: () => void;
 };
 
-interface SignUpData {
-  profile?: ProfileData;
-  address?: AddressData;
-}
-
 const SignUpForm = ({ onFormChange }: Props) => {
-  const [step, setStep] = useState(SignUpStep.PROFILE);
-
-  const [signUpData, setSignUpData] = useState<SignUpData>({});
+  const { currentStep } = useSignUpContext();
 
   const renderStep = () => {
-    switch (step) {
+    switch (currentStep) {
       case SignUpStep.PROFILE:
-        return (
-          <ProfileStep
-            setStep={(profileData) => {
-              setStep(SignUpStep.ADDRESS);
-              setSignUpData({ ...signUpData, profile: profileData });
-            }}
-          />
-        );
+        return <ProfileStep onBackPress={() => onFormChange(Form.LOGIN)} />;
       case SignUpStep.ADDRESS:
-        return (
-          <AddressStep
-            setStep={(addressData) => {
-              setStep(SignUpStep.CREDIT_CARD);
-              setSignUpData({ ...signUpData, address: addressData });
-            }}
-          />
-        );
+        return <AddressStep />;
       case SignUpStep.CREDIT_CARD:
         return <CreditCardStep />;
     }
   };
 
   return (
-    <>
-      <Stack w="60%" spacing={6}>
-        {renderStep()}
-      </Stack>
-    </>
+    <Stack w="70%" spacing={6}>
+      {renderStep()}
+    </Stack>
   );
 };
 

@@ -5,6 +5,7 @@ import LoginCard from '../components/LoginCard';
 import LoginForm from '../components/LoginForm';
 import { StringParam, useQueryParam } from 'use-query-params';
 import SignUpForm from '../components/SignUpForm';
+import { SignUpContextProvider } from '../context/SignUpContext';
 
 export enum Form {
   LOGIN = 'login',
@@ -23,7 +24,9 @@ const Login = () => {
       <Box w="120vh" d="flex" bg="white" color="black" borderRadius="12">
         <LoginCard borderLeftRadius="10">
           {form === Form.SIGNUP ? (
-            <SignUpForm onFormChange={onFormChange} />
+            <SignUpContextProvider>
+              <SignUpForm onFormChange={onFormChange} />
+            </SignUpContextProvider>
           ) : (
             <LoginForm onFormChange={onFormChange} />
           )}

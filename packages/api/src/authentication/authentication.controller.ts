@@ -24,7 +24,7 @@ const login = async (req: Request, res: Response) => {
     Constants.JWT_SECRET
   );
 
-  res.json({ accessToken });
+  res.json({ accessToken, role: user.profile, email: user.email });
 };
 
 export default {

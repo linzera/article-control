@@ -60,8 +60,8 @@ model Address {
 model Article {
   id          String   @id @default(uuid())
   uri         String
-  submittedAt DateTime
-  publishedAt DateTime
+  abstract    String
+  submittedAt DateTime @default(now())
   reviews     Review[]
   User        User    @relation(fields: [userId], references: [id])
   userId      String
@@ -85,7 +85,7 @@ model Event {
   description        String
   startAt            DateTime
   endAt              DateTime
-  sumissionLimitDate DateTime
+  submissionLimitDate DateTime
   reviewLimitDate    DateTime
   articles           Article[]
 }

@@ -1,5 +1,8 @@
-import { Button, HStack, Input, Select } from '@chakra-ui/react';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { Button, HStack, Input, Select, IconButton } from '@chakra-ui/react';
+
 import { useForm } from 'react-hook-form';
+import useSignUpContext, { SignUpStep } from '../context/SignUpContext';
 
 export interface ProfileData {
   name: string;
@@ -10,21 +13,26 @@ export interface ProfileData {
   role: string;
 }
 
-type Props = {
-  setStep: (profileData: ProfileData) => void;
-};
-
-const ProfileStep = ({ setStep }: Props) => {
+const ProfileStep = ({ onBackPress }: any) => {
+  const { onProfileSubmit, setStep, form } = useSignUpContext();
   const { register, handleSubmit, setValue } = useForm<ProfileData>({
     reValidateMode: 'onChange',
+    defaultValues: form.profile,
   });
 
   const onSubmit = (profileData: ProfileData) => {
-    setStep(profileData);
+    onProfileSubmit(profileData);
+    setStep(SignUpStep.ADDRESS);
   };
 
   return (
     <>
+      <IconButton
+        width={8}
+        aria-label="seta_esquerda"
+        icon={<ChevronLeftIcon />}
+        onClick={onBackPress}
+      />
       <HStack>
         <Input placeholder="Nome" {...register('name')} />
         <Input
@@ -35,7 +43,7 @@ const ProfileStep = ({ setStep }: Props) => {
       </HStack>
       <Input placeholder="Local de emprego" {...register('job')} />
       <Input placeholder="Email" {...register('email')} />
-      <Input placeholder="Senha" {...register('password')} />
+      <Input type="password" placeholder="Senha" {...register('password')} />
       <Select
         placeholder="Selecione seu tipo de conta"
         onChange={(e) => setValue('role', e.target.value)}

@@ -13,6 +13,7 @@ import { useMutation } from 'react-query';
 import { FieldError, useForm } from 'react-hook-form';
 import authentication from '../services/authentication';
 import { Form } from '../screens/Login';
+import { useNavigate } from 'react-router-dom';
 
 type SubmitArgs = {
   email: string;
@@ -43,6 +44,8 @@ const LoginForm = ({ onFormChange }: Props) => {
     reValidateMode: 'onChange',
   });
 
+  const navigate = useNavigate();
+
   const toast = useToast();
 
   const { isLoading, mutate } = useMutation(
@@ -50,6 +53,7 @@ const LoginForm = ({ onFormChange }: Props) => {
     {
       onSuccess: (res) => {
         localStorage.setItem('userToken', res.data.accessToken);
+        navigate('/');
       },
       onError: (err) => {
         if ((err as any).response.data.error) {
